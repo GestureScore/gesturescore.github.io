@@ -1,0 +1,127 @@
+<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="'Georgia', serif">
+  <defs>
+    <marker id="cxlArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#185FA5"/>
+    </marker>
+    <marker id="kvArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#1D9E75"/>
+    </marker>
+  </defs>
+  <rect width="820" height="440" fill="#FAFAF8" rx="14"/>
+  <text x="410" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#2C2C2A" letter-spacing="0.5">CXL 2.0 CLUSTER — DISAGGREGATED PREFILL / DECODE TOPOLOGY</text>
+  <text x="410" y="50" text-anchor="middle" font-size="11" fill="#888780">8-chip cluster · 64 GB/s per chip · ~100ns hop latency · hardware-coherent KV sharing</text>
+
+  <!-- PREFILL POOL (top row) -->
+  <text x="130" y="78" text-anchor="middle" font-size="11" font-weight="bold" fill="#534AB7">PREFILL POOL</text>
+  <text x="130" y="92" text-anchor="middle" font-size="9" fill="#7F77DD">Compute-intensive</text>
+
+  <!-- Prefill chips -->
+  <rect x="30" y="100" width="110" height="80" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="85" y="122" text-anchor="middle" font-size="10" fill="#3C3489" font-weight="bold">P0 — Prefill</text>
+  <text x="85" y="136" text-anchor="middle" font-size="8.5" fill="#534AB7">256 Pods active</text>
+  <text x="85" y="150" text-anchor="middle" font-size="8.5" fill="#534AB7">High TCA util</text>
+  <text x="85" y="164" text-anchor="middle" font-size="8.5" fill="#534AB7">Processes prompts</text>
+
+  <rect x="155" y="100" width="110" height="80" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="210" y="122" text-anchor="middle" font-size="10" fill="#3C3489" font-weight="bold">P1 — Prefill</text>
+  <text x="210" y="136" text-anchor="middle" font-size="8.5" fill="#534AB7">256 Pods active</text>
+  <text x="210" y="150" text-anchor="middle" font-size="8.5" fill="#534AB7">High TCA util</text>
+  <text x="210" y="164" text-anchor="middle" font-size="8.5" fill="#534AB7">Processes prompts</text>
+
+  <rect x="280" y="100" width="110" height="80" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="335" y="122" text-anchor="middle" font-size="10" fill="#3C3489" font-weight="bold">P2 — Prefill</text>
+  <text x="335" y="136" text-anchor="middle" font-size="8.5" fill="#534AB7">256 Pods active</text>
+  <text x="335" y="150" text-anchor="middle" font-size="8.5" fill="#534AB7">High TCA util</text>
+  <text x="335" y="164" text-anchor="middle" font-size="8.5" fill="#534AB7">Processes prompts</text>
+
+  <rect x="405" y="100" width="110" height="80" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="460" y="122" text-anchor="middle" font-size="10" fill="#3C3489" font-weight="bold">P3 — Prefill</text>
+  <text x="460" y="136" text-anchor="middle" font-size="8.5" fill="#534AB7">256 Pods active</text>
+  <text x="460" y="150" text-anchor="middle" font-size="8.5" fill="#534AB7">High TCA util</text>
+  <text x="460" y="164" text-anchor="middle" font-size="8.5" fill="#534AB7">Processes prompts</text>
+
+  <!-- CXL Switch (center) -->
+  <rect x="548" y="88" width="240" height="104" rx="8" fill="#E6F1FB" stroke="#378ADD" stroke-width="2"/>
+  <text x="668" y="110" text-anchor="middle" font-size="12" font-weight="bold" fill="#0C447C">CXL 2.0 Switch</text>
+  <text x="668" y="126" text-anchor="middle" font-size="9" fill="#185FA5">Microchip PAX28 / Astera Labs Leo</text>
+  <line x1="558" y1="134" x2="778" y2="134" stroke="#B5D4F4" stroke-width="0.8"/>
+  <text x="668" y="150" text-anchor="middle" font-size="9" fill="#185FA5">16-port · 64 GB/s per chip</text>
+  <text x="668" y="164" text-anchor="middle" font-size="9" fill="#185FA5">~100–150ns hop latency</text>
+  <text x="668" y="178" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="bold">Hardware-coherent memory semantics</text>
+
+  <!-- KV cache transfer label (center) -->
+  <rect x="548" y="202" width="240" height="40" rx="5" fill="#E1F5EE" stroke="#1D9E75"/>
+  <text x="668" y="218" text-anchor="middle" font-size="9" fill="#085041" font-weight="bold">KV cache transfer: Prefill → Decode</text>
+  <text x="668" y="232" text-anchor="middle" font-size="9" fill="#0F6E56">1GB context @ 64 GB/s = ~16ms · &lt;5ms typical</text>
+
+  <!-- DECODE POOL (bottom row) -->
+  <text x="270" y="268" text-anchor="middle" font-size="11" font-weight="bold" fill="#085041">DECODE POOL</text>
+  <text x="270" y="282" text-anchor="middle" font-size="9" fill="#0F6E56">CMFC-optimized · high Pod concurrency</text>
+
+  <!-- Decode chips -->
+  <rect x="30" y="290" width="110" height="80" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="85" y="312" text-anchor="middle" font-size="10" fill="#085041" font-weight="bold">D0 — Decode</text>
+  <text x="85" y="326" text-anchor="middle" font-size="8.5" fill="#0F6E56">256 Pods · CMFC</text>
+  <text x="85" y="340" text-anchor="middle" font-size="8.5" fill="#0F6E56">Max concurrency</text>
+  <text x="85" y="354" text-anchor="middle" font-size="8.5" fill="#0F6E56">Token generation</text>
+
+  <rect x="155" y="290" width="110" height="80" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="210" y="312" text-anchor="middle" font-size="10" fill="#085041" font-weight="bold">D1 — Decode</text>
+  <text x="210" y="326" text-anchor="middle" font-size="8.5" fill="#0F6E56">256 Pods · CMFC</text>
+  <text x="210" y="340" text-anchor="middle" font-size="8.5" fill="#0F6E56">Max concurrency</text>
+  <text x="210" y="354" text-anchor="middle" font-size="8.5" fill="#0F6E56">Token generation</text>
+
+  <rect x="280" y="290" width="110" height="80" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="335" y="312" text-anchor="middle" font-size="10" fill="#085041" font-weight="bold">D2 — Decode</text>
+  <text x="335" y="326" text-anchor="middle" font-size="8.5" fill="#0F6E56">256 Pods · CMFC</text>
+  <text x="335" y="340" text-anchor="middle" font-size="8.5" fill="#0F6E56">Max concurrency</text>
+  <text x="335" y="354" text-anchor="middle" font-size="8.5" fill="#0F6E56">Token generation</text>
+
+  <rect x="405" y="290" width="110" height="80" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="460" y="312" text-anchor="middle" font-size="10" fill="#085041" font-weight="bold">D3 — Decode</text>
+  <text x="460" y="326" text-anchor="middle" font-size="8.5" fill="#0F6E56">256 Pods · CMFC</text>
+  <text x="460" y="340" text-anchor="middle" font-size="8.5" fill="#0F6E56">Max concurrency</text>
+  <text x="460" y="354" text-anchor="middle" font-size="8.5" fill="#0F6E56">Token generation</text>
+
+  <!-- Arrows: Prefill chips → CXL Switch -->
+  <line x1="140" y1="140" x2="546" y2="140" stroke="#378ADD" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#cxlArrow)"/>
+  <line x1="265" y1="140" x2="546" y2="140" stroke="#378ADD" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <line x1="390" y1="140" x2="546" y2="140" stroke="#378ADD" stroke-width="1.2" stroke-dasharray="4,2"/>
+  <line x1="515" y1="140" x2="546" y2="140" stroke="#378ADD" stroke-width="1.2" stroke-dasharray="4,2"/>
+
+  <!-- Arrows: CXL Switch → Decode chips (KV cache transfer) -->
+  <line x1="548" y1="222" x2="460" y2="290" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#kvArrow)"/>
+  <line x1="548" y1="222" x2="335" y2="290" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#kvArrow)"/>
+  <line x1="548" y1="222" x2="210" y2="290" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#kvArrow)"/>
+  <line x1="548" y1="222" x2="85" y2="290" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#kvArrow)"/>
+
+  <!-- Cluster size table (right) -->
+  <rect x="548" y="258" width="240" height="152" rx="8" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.2"/>
+  <text x="668" y="276" text-anchor="middle" font-size="11" font-weight="bold" fill="#2C2C2A">Cluster Scale Reference</text>
+  <line x1="558" y1="284" x2="778" y2="284" stroke="#D3D1C7" stroke-width="0.8"/>
+
+  <rect x="558" y="290" width="220" height="20" rx="3" fill="#EEEDFE"/>
+  <text x="580" y="304" font-size="8.5" fill="#3C3489" font-weight="bold">1 chip (dev/startup)</text>
+  <text x="770" y="304" text-anchor="end" font-size="8.5" fill="#534AB7">256 Pods</text>
+
+  <rect x="558" y="314" width="220" height="20" rx="3" fill="#E1F5EE"/>
+  <text x="580" y="328" font-size="8.5" fill="#085041" font-weight="bold">8 chips (SME enterprise)</text>
+  <text x="770" y="328" text-anchor="end" font-size="8.5" fill="#0F6E56">1,024 Pods</text>
+
+  <rect x="558" y="338" width="220" height="20" rx="3" fill="#FAEEDA"/>
+  <text x="580" y="352" font-size="8.5" fill="#633806" font-weight="bold">64 chips (regional hub)</text>
+  <text x="770" y="352" text-anchor="end" font-size="8.5" fill="#854F0B">8,192 Pods</text>
+
+  <rect x="558" y="362" width="220" height="20" rx="3" fill="#FCEBEB"/>
+  <text x="580" y="376" font-size="8.5" fill="#791F1F" font-weight="bold">512 chips (hyperscale)</text>
+  <text x="770" y="376" text-anchor="end" font-size="8.5" fill="#A32D2D">65,536 Pods</text>
+
+  <!-- vs H100 comparison row -->
+  <rect x="558" y="390" width="220" height="14" rx="3" fill="#D3D1C7"/>
+  <text x="668" y="401" text-anchor="middle" font-size="8" fill="#444441">H100 cluster: ~8 active contexts · $960K / 32 chips</text>
+
+  <!-- Bottom summary -->
+  <rect x="20" y="396" width="518" height="36" rx="6" fill="#0C447C"/>
+  <text x="259" y="410" text-anchor="middle" font-size="9.5" fill="white" font-weight="bold">Disaggregation benefit: prefill never blocks decode</text>
+  <text x="259" y="424" text-anchor="middle" font-size="9" fill="#B5D4F4">TTFT degradation from decode-interference: eliminated</text>
+</svg>

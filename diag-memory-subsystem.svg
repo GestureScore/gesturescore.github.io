@@ -1,0 +1,152 @@
+<svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg" font-family="'Georgia', serif">
+  <rect width="820" height="480" fill="#FAFAF8" rx="14"/>
+  <text x="410" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#2C2C2A" letter-spacing="0.5">MEMORY SUBSYSTEM — GDDR7 + ON-CHIP SRAM ARCHITECTURE</text>
+  <text x="410" y="50" text-anchor="middle" font-size="11" fill="#888780">Two-tier hierarchy · 512MB hot SRAM + 96GB GDDR7 · FOPLP via ASE Group</text>
+
+  <!-- ── LEFT: GDDR7 vs HBM comparison ── -->
+  <rect x="20" y="64" width="380" height="290" rx="8" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.2"/>
+  <text x="210" y="84" text-anchor="middle" font-size="12" font-weight="bold" fill="#2C2C2A">GDDR7 vs HBM3e — Selection Rationale</text>
+  <line x1="30" y1="92" x2="390" y2="92" stroke="#D3D1C7" stroke-width="0.8"/>
+
+  <!-- Column headers -->
+  <text x="155" y="108" text-anchor="middle" font-size="10" font-weight="bold" fill="#791F1F">HBM3e (H100)</text>
+  <text x="315" y="108" text-anchor="middle" font-size="10" font-weight="bold" fill="#085041">GDDR7 (CortexChip)</text>
+  <line x1="30" y1="114" x2="390" y2="114" stroke="#D3D1C7" stroke-width="0.6"/>
+
+  <!-- Row: Bandwidth -->
+  <text x="36" y="130" font-size="9" fill="#444441">Bandwidth</text>
+  <rect x="110" y="118" width="90" height="18" rx="3" fill="#FCEBEB"/><text x="155" y="131" text-anchor="middle" font-size="9" fill="#791F1F">3.35 TB/s</text>
+  <rect x="268" y="118" width="118" height="18" rx="3" fill="#EAF3DE"/><text x="327" y="131" text-anchor="middle" font-size="9" fill="#27500A">~1.8 TB/s (×8 stacks)</text>
+
+  <!-- Row: Capacity -->
+  <text x="36" y="152" font-size="9" fill="#444441">Capacity / chip</text>
+  <rect x="110" y="140" width="90" height="18" rx="3" fill="#EAF3DE"/><text x="155" y="153" text-anchor="middle" font-size="9" fill="#27500A">80 GB</text>
+  <rect x="268" y="140" width="118" height="18" rx="3" fill="#EAF3DE"/><text x="327" y="153" text-anchor="middle" font-size="9" fill="#27500A">96 GB (+20%)</text>
+
+  <!-- Row: Cost/GB -->
+  <text x="36" y="174" font-size="9" fill="#444441">Cost per GB</text>
+  <rect x="110" y="162" width="90" height="18" rx="3" fill="#FCEBEB"/><text x="155" y="175" text-anchor="middle" font-size="9" fill="#791F1F">~$25–40</text>
+  <rect x="268" y="162" width="118" height="18" rx="3" fill="#EAF3DE"/><text x="327" y="175" text-anchor="middle" font-size="9" fill="#27500A">~$5–8 (4–5× cheaper)</text>
+
+  <!-- Row: Packaging -->
+  <text x="36" y="196" font-size="9" fill="#444441">Packaging</text>
+  <rect x="110" y="184" width="90" height="18" rx="3" fill="#FCEBEB"/><text x="155" y="197" text-anchor="middle" font-size="9" fill="#791F1F">TSMC CoWoS (lock-in)</text>
+  <rect x="268" y="184" width="118" height="18" rx="3" fill="#EAF3DE"/><text x="327" y="197" text-anchor="middle" font-size="9" fill="#27500A">FOPLP via ASE Group</text>
+
+  <!-- Row: Supply -->
+  <text x="36" y="218" font-size="9" fill="#444441">Supply chain</text>
+  <rect x="110" y="206" width="90" height="18" rx="3" fill="#FCEBEB"/><text x="155" y="219" text-anchor="middle" font-size="9" fill="#791F1F">SK Hynix primary, scarce</text>
+  <rect x="268" y="206" width="118" height="18" rx="3" fill="#EAF3DE"/><text x="327" y="219" text-anchor="middle" font-size="9" fill="#27500A">Samsung + SK Hynix + Micron</text>
+
+  <!-- Row: W4A8 effective need -->
+  <text x="36" y="240" font-size="9" fill="#444441">W4A8 eff. need</text>
+  <rect x="110" y="228" width="90" height="18" rx="3" fill="#FAEEDA"/><text x="155" y="241" text-anchor="middle" font-size="9" fill="#633806">~3.35 TB/s (FP16)</text>
+  <rect x="268" y="228" width="118" height="18" rx="3" fill="#EAF3DE"/><text x="327" y="241" text-anchor="middle" font-size="9" fill="#27500A">~700 GB/s (4× compressed)</text>
+
+  <!-- Verdict -->
+  <rect x="30" y="262" width="360" height="26" rx="5" fill="#085041"/>
+  <text x="210" y="278" text-anchor="middle" font-size="10" fill="white" font-weight="bold">GDDR7 + FOPLP: no TSMC dependency · startup-accessible · sufficient at W4A8</text>
+
+  <!-- BW gap annotation -->
+  <rect x="30" y="296" width="360" height="46" rx="5" fill="#E6F1FB" stroke="#378ADD"/>
+  <text x="210" y="312" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="bold">Effective bandwidth math (70B W4A8, TTFT &lt;50ms, batch=1):</text>
+  <text x="210" y="326" text-anchor="middle" font-size="9" fill="#185FA5">Required: 35GB / 0.050s = 700 GB/s</text>
+  <text x="210" y="340" text-anchor="middle" font-size="9" fill="#185FA5">GDDR7 effective: ~1.2–1.5 TB/s (after overhead)</text>
+  <text x="210" y="354" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="bold">Margin: 1.7–2.1× — validated in FPGA phase</text>
+
+  <!-- ── RIGHT: SRAM Pod slot breakdown ── -->
+  <rect x="420" y="64" width="380" height="290" rx="8" fill="#FBEAF0" stroke="#D4537E" stroke-width="1.5"/>
+  <text x="610" y="84" text-anchor="middle" font-size="12" font-weight="bold" fill="#72243E">On-Chip SRAM — 512MB Pod Architecture</text>
+  <text x="610" y="100" text-anchor="middle" font-size="9" fill="#993556">256 slots × 2MB each · hardware-managed LRU</text>
+  <line x1="430" y1="108" x2="790" y2="108" stroke="#ED93B1" stroke-width="0.8"/>
+
+  <!-- Pod slot diagram -->
+  <text x="436" y="124" font-size="9" fill="#72243E" font-weight="bold">Single Pod SRAM slot (2MB):</text>
+  <rect x="430" y="130" width="360" height="140" rx="6" fill="#F4C0D1" stroke="#D4537E" stroke-width="1"/>
+
+  <!-- Sub-regions of 2MB -->
+  <!-- LoRA: 512KB -->
+  <rect x="436" y="136" width="88" height="128" rx="4" fill="#993556"/>
+  <text x="480" y="160" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">LoRA</text>
+  <text x="480" y="174" text-anchor="middle" font-size="8" fill="#F4C0D1">Adapter</text>
+  <text x="480" y="188" text-anchor="middle" font-size="8" fill="#F4C0D1">Weights</text>
+  <text x="480" y="208" text-anchor="middle" font-size="8.5" fill="#ED93B1" font-weight="bold">512 KB</text>
+  <text x="480" y="222" text-anchor="middle" font-size="7.5" fill="#F4C0D1">rank-64</text>
+  <text x="480" y="232" text-anchor="middle" font-size="7.5" fill="#F4C0D1">INT4</text>
+  <text x="480" y="244" text-anchor="middle" font-size="7.5" fill="#F4C0D1">&lt;100ms swap</text>
+
+  <!-- KV cache: 1024KB -->
+  <rect x="530" y="136" width="130" height="128" rx="4" fill="#72243E"/>
+  <text x="595" y="160" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">KV Cache</text>
+  <text x="595" y="174" text-anchor="middle" font-size="8" fill="#F4C0D1">Recent Pages</text>
+  <text x="595" y="208" text-anchor="middle" font-size="8.5" fill="#ED93B1" font-weight="bold">1,024 KB</text>
+  <text x="595" y="222" text-anchor="middle" font-size="7.5" fill="#F4C0D1">~4,000 tokens</text>
+  <text x="595" y="234" text-anchor="middle" font-size="7.5" fill="#F4C0D1">HW LRU eviction</text>
+  <text x="595" y="246" text-anchor="middle" font-size="7.5" fill="#F4C0D1">GDDR7 overflow</text>
+
+  <!-- Activation: 384KB -->
+  <rect x="666" y="136" width="70" height="128" rx="4" fill="#D4537E"/>
+  <text x="701" y="160" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">Activation</text>
+  <text x="701" y="174" text-anchor="middle" font-size="8" fill="#F4C0D1">Buffer</text>
+  <text x="701" y="208" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">384 KB</text>
+  <text x="701" y="222" text-anchor="middle" font-size="7.5" fill="#F4C0D1">Fwd pass</text>
+  <text x="701" y="234" text-anchor="middle" font-size="7.5" fill="#F4C0D1">pipeline</text>
+
+  <!-- Scratchpad: 128KB -->
+  <rect x="740" y="136" width="44" height="128" rx="4" fill="#993556"/>
+  <text x="762" y="160" text-anchor="middle" font-size="8" fill="white">Meta</text>
+  <text x="762" y="174" text-anchor="middle" font-size="7" fill="#F4C0D1">&amp; CMFC</text>
+  <text x="762" y="208" text-anchor="middle" font-size="8" fill="#ED93B1">128KB</text>
+
+  <!-- Prefetcher box -->
+  <rect x="430" y="284" width="360" height="60" rx="5" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.2"/>
+  <text x="610" y="300" text-anchor="middle" font-size="10" font-weight="bold" fill="#085041">Hardware Prefetcher — Mesh-History-Based</text>
+  <text x="610" y="315" text-anchor="middle" font-size="9" fill="#0F6E56">Tracks Pod activation sequence from mesh routing history</text>
+  <text x="610" y="330" text-anchor="middle" font-size="9" fill="#0F6E56">Pre-stages KV pages from GDDR7 before handoff instruction</text>
+  <text x="610" y="345" text-anchor="middle" font-size="9" fill="#085041" font-weight="bold">Target: &gt;75% cache hit rate after 100 stable-mesh requests</text>
+
+  <!-- Bottom: GDDR7 chiplets visual -->
+  <rect x="20" y="368" width="780" height="96" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="1.2"/>
+  <text x="410" y="386" text-anchor="middle" font-size="11" font-weight="bold" fill="#2C2C2A">GDDR7 Chiplet Integration — FOPLP (Fan-Out Panel Level Packaging)</text>
+  <text x="410" y="400" text-anchor="middle" font-size="9" fill="#5F5E5A">ASE Group · No TSMC CoWoS · Standard BGA · Commodity supply chain</text>
+
+  <!-- 8 GDDR7 chiplets -->
+  <rect x="32" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="72" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #0</text>
+  <text x="72" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="122" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="162" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #1</text>
+  <text x="162" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="212" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="252" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #2</text>
+  <text x="252" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="302" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="342" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #3</text>
+  <text x="342" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="392" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="432" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #4</text>
+  <text x="432" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="482" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="522" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #5</text>
+  <text x="522" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="572" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="612" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #6</text>
+  <text x="612" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <rect x="662" y="408" width="80" height="44" rx="5" fill="#D4537E" stroke="#993556"/>
+  <text x="702" y="427" text-anchor="middle" font-size="9" fill="white" font-weight="bold">GDDR7 #7</text>
+  <text x="702" y="441" text-anchor="middle" font-size="8" fill="#F4C0D1">12GB · 128GB/s</text>
+
+  <text x="760" y="427" text-anchor="middle" font-size="16" fill="#888780" font-weight="bold">=</text>
+  <text x="760" y="442" text-anchor="middle" font-size="8" fill="#5F5E5A">96GB</text>
+
+  <!-- Total bandwidth bar -->
+  <rect x="20" y="462" width="780" height="14" rx="4" fill="#72243E"/>
+  <text x="410" y="473" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Total: 96GB capacity · ~1.8 TB/s aggregate bandwidth · 8 independent channels</text>
+</svg>

@@ -1,0 +1,180 @@
+<svg viewBox="0 0 820 560" xmlns="http://www.w3.org/2000/svg" font-family="'Georgia', serif">
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#185FA5"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#0F6E56"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#534AB7"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#854F0B"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5F5E5A"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="560" fill="#FAFAF8" rx="14"/>
+
+  <!-- Title -->
+  <text x="410" y="34" text-anchor="middle" font-size="15" font-weight="bold" fill="#2C2C2A" letter-spacing="0.5">CORTEXMESH FABRIC CONTROLLER — INTERNAL ARCHITECTURE</text>
+  <text x="410" y="52" text-anchor="middle" font-size="11" fill="#888780">~112mm² dedicated silicon block · 1.2 GHz target · 4 hardware primitives</text>
+
+  <!-- Outer CMFC boundary -->
+  <rect x="22" y="64" width="776" height="464" rx="12" fill="#F3FCF7" stroke="#1D9E75" stroke-width="2"/>
+  <text x="410" y="84" text-anchor="middle" font-size="11" fill="#0F6E56" font-weight="bold">CMFC DIE REGION</text>
+
+  <!-- ── PRIMITIVE 1: Context Slot Manager (top-left) ── -->
+  <rect x="38" y="96" width="248" height="190" rx="8" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="162" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#085041">① Context Slot Manager</text>
+  <text x="162" y="130" text-anchor="middle" font-size="9" fill="#0F6E56">&lt;100ns directory lookup</text>
+  <line x1="48" y1="138" x2="276" y2="138" stroke="#5DCAA5" stroke-width="0.8"/>
+
+  <!-- 256 pod slots mini-grid -->
+  <text x="80" y="154" font-size="9" fill="#085041" font-weight="bold">256 Pod Directory Entries:</text>
+  <!-- grid of slots -->
+  <rect x="48" y="160" width="208" height="114" rx="4" fill="#9FE1CB" stroke="#1D9E75" stroke-width="0.8"/>
+  <!-- row 1 -->
+  <rect x="54" y="165" width="30" height="18" rx="2" fill="#E1F5EE"/><text x="69" y="178" text-anchor="middle" font-size="7" fill="#085041">Pod 0</text>
+  <rect x="88" y="165" width="30" height="18" rx="2" fill="#E1F5EE"/><text x="103" y="178" text-anchor="middle" font-size="7" fill="#085041">Pod 1</text>
+  <rect x="122" y="165" width="30" height="18" rx="2" fill="#E1F5EE"/><text x="137" y="178" text-anchor="middle" font-size="7" fill="#085041">Pod 2</text>
+  <rect x="156" y="165" width="30" height="18" rx="2" fill="#E1F5EE"/><text x="171" y="178" text-anchor="middle" font-size="7" fill="#085041">Pod 3</text>
+  <rect x="190" y="165" width="30" height="18" rx="2" fill="#FAEEDA"/><text x="205" y="178" text-anchor="middle" font-size="7" fill="#633806">Pod 4</text>
+  <rect x="224" y="165" width="28" height="18" rx="2" fill="#FAEEDA"/><text x="238" y="178" text-anchor="middle" font-size="7" fill="#633806">…</text>
+  <!-- row 2 labels -->
+  <text x="54" y="200" font-size="7.5" fill="#04342C">Each entry holds:</text>
+  <text x="54" y="212" font-size="7.5" fill="#04342C">· Pod ID + Model ID + LoRA Adapter ID</text>
+  <text x="54" y="223" font-size="7.5" fill="#04342C">· Priority lane (0=highest)</text>
+  <text x="54" y="234" font-size="7.5" fill="#04342C">· SRAM slot base address (2MB)</text>
+  <text x="54" y="245" font-size="7.5" fill="#04342C">· KV page table (up to 512 entries)</text>
+  <text x="54" y="256" font-size="7.5" fill="#04342C">· Mesh membership bitmask (64-bit)</text>
+  <text x="54" y="267" font-size="7.5" fill="#04342C">· State: ACTIVE/READY/HANDOFF/EMPTY</text>
+
+  <!-- ── PRIMITIVE 2: State Transfer Engine (top-right) ── -->
+  <rect x="302" y="96" width="248" height="190" rx="8" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="426" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#3C3489">② State Transfer Engine</text>
+  <text x="426" y="130" text-anchor="middle" font-size="9" fill="#534AB7">&lt;1.5ms for 4GB KV block · ~1 TB/s fabric</text>
+  <line x1="312" y1="138" x2="540" y2="138" stroke="#AFA9EC" stroke-width="0.8"/>
+
+  <!-- Transfer pipeline boxes -->
+  <rect x="314" y="146" width="220" height="130" rx="4" fill="#CECBF6" stroke="#7F77DD" stroke-width="0.8"/>
+  <text x="424" y="162" text-anchor="middle" font-size="9" fill="#26215C" font-weight="bold">Handoff Protocol (Pod A → Pod B)</text>
+  <line x1="320" y1="168" x2="528" y2="168" stroke="#AFA9EC" stroke-width="0.6"/>
+
+  <rect x="320" y="174" width="198" height="18" rx="3" fill="#EEEDFE"/><text x="419" y="186" text-anchor="middle" font-size="8" fill="#3C3489">Step 1: Serialize delta KV state (~32KB)</text>
+  <rect x="320" y="196" width="198" height="18" rx="3" fill="#EEEDFE"/><text x="419" y="208" text-anchor="middle" font-size="8" fill="#3C3489">Step 2: DMA → target SRAM slot (256 GB/s bus)</text>
+  <rect x="320" y="218" width="198" height="18" rx="3" fill="#EEEDFE"/><text x="419" y="230" text-anchor="middle" font-size="8" fill="#3C3489">Step 3: Update B KV page table (zero-copy ref)</text>
+  <rect x="320" y="240" width="198" height="18" rx="3" fill="#EEEDFE"/><text x="419" y="252" text-anchor="middle" font-size="8" fill="#3C3489">Step 4: Signal B priority lane → ACTIVE</text>
+  <rect x="320" y="262" width="198" height="12" rx="2" fill="#7F77DD"/><text x="419" y="272" text-anchor="middle" font-size="8" fill="white" font-weight="bold">CPU involvement: ZERO</text>
+
+  <!-- ── PRIMITIVE 3: SLA Arbiter (bottom-left) ── -->
+  <rect x="38" y="304" width="248" height="196" rx="8" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1.5"/>
+  <text x="162" y="324" text-anchor="middle" font-size="11" font-weight="bold" fill="#633806">③ SLA Arbiter</text>
+  <text x="162" y="338" text-anchor="middle" font-size="9" fill="#854F0B">&lt;50ns arbitration cycle · hardware preemption</text>
+  <line x1="48" y1="346" x2="276" y2="346" stroke="#FAC775" stroke-width="0.8"/>
+
+  <!-- Priority lanes -->
+  <text x="55" y="362" font-size="9" fill="#633806" font-weight="bold">256 hardware priority lanes:</text>
+  <rect x="48" y="368" width="80" height="22" rx="4" fill="#EF9F27"/>
+  <text x="88" y="383" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">P0 — Interactive</text>
+  <rect x="48" y="394" width="80" height="22" rx="4" fill="#FAC775"/>
+  <text x="88" y="409" text-anchor="middle" font-size="8.5" fill="#633806" font-weight="bold">P1 — Standard</text>
+  <rect x="48" y="420" width="80" height="22" rx="4" fill="#FAEEDA" stroke="#EF9F27"/>
+  <text x="88" y="435" text-anchor="middle" font-size="8.5" fill="#854F0B" font-weight="bold">P2 — Batch</text>
+  <rect x="48" y="446" width="80" height="22" rx="4" fill="#F1EFE8" stroke="#B4B2A9"/>
+  <text x="88" y="461" text-anchor="middle" font-size="8.5" fill="#888780" font-weight="bold">P3 — Background</text>
+
+  <!-- Preemption logic -->
+  <rect x="138" y="368" width="128" height="100" rx="4" fill="#FAC775" stroke="#EF9F27" stroke-width="0.8"/>
+  <text x="202" y="384" text-anchor="middle" font-size="8.5" fill="#412402" font-weight="bold">Preemption model</text>
+  <text x="202" y="398" text-anchor="middle" font-size="7.5" fill="#633806">P0 arrives while P2 runs:</text>
+  <text x="202" y="410" text-anchor="middle" font-size="7.5" fill="#633806">1. Wait current decode step</text>
+  <text x="202" y="422" text-anchor="middle" font-size="7.5" fill="#633806">   (~2–5ms granularity)</text>
+  <text x="202" y="434" text-anchor="middle" font-size="7.5" fill="#633806">2. Save P2 scratchpad state</text>
+  <text x="202" y="446" text-anchor="middle" font-size="7.5" fill="#633806">3. Schedule P0 immediately</text>
+  <text x="202" y="458" text-anchor="middle" font-size="7.5" fill="#633806">4. Total: &lt;7ms worst-case</text>
+
+  <rect x="48" y="476" width="218" height="18" rx="4" fill="#EF9F27"/>
+  <text x="157" y="489" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Interactive TTFT budget remaining: 43ms</text>
+
+  <!-- ── PRIMITIVE 4: Shared Read Bus (bottom-right) ── -->
+  <rect x="302" y="304" width="248" height="196" rx="8" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/>
+  <text x="426" y="324" text-anchor="middle" font-size="11" font-weight="bold" fill="#712B13">④ Shared Read Bus</text>
+  <text x="426" y="338" text-anchor="middle" font-size="9" fill="#993C1D">&lt;200ns broadcast · hardware coherency</text>
+  <line x1="312" y1="346" x2="540" y2="346" stroke="#F0997B" stroke-width="0.8"/>
+
+  <!-- Shared KV mechanism -->
+  <text x="316" y="362" font-size="9" fill="#712B13" font-weight="bold">Zero-copy KV sharing protocol:</text>
+
+  <rect x="312" y="368" width="230" height="20" rx="3" fill="#F5C4B3"/><text x="427" y="382" text-anchor="middle" font-size="8" fill="#4A1B0C">Agent 1 computes doc KV → marks pages shared=1</text>
+  <path d="M427 388 L427 396" stroke="#D85A30" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
+  <rect x="312" y="396" width="230" height="20" rx="3" fill="#F5C4B3"/><text x="427" y="410" text-anchor="middle" font-size="8" fill="#4A1B0C">CMFC broadcasts page table refs to mesh peers</text>
+  <path d="M427 416 L427 424" stroke="#D85A30" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
+  <rect x="312" y="424" width="230" height="20" rx="3" fill="#F5C4B3"/><text x="427" y="438" text-anchor="middle" font-size="8" fill="#4A1B0C">Agents 2–4 access via shared physical pages</text>
+  <path d="M427 444 L427 452" stroke="#D85A30" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
+  <rect x="312" y="452" width="230" height="20" rx="3" fill="#F5C4B3"/><text x="427" y="466" text-anchor="middle" font-size="8" fill="#4A1B0C">Write → hardware copy-on-write (no CPU)</text>
+
+  <rect x="312" y="478" width="230" height="18" rx="4" fill="#D85A30"/>
+  <text x="427" y="491" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Result: 84GB → 21GB · 75% compute saved</text>
+
+  <!-- ── CENTER: Mesh Routing Fabric ── -->
+  <rect x="566" y="96" width="218" height="404" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="1.5"/>
+  <text x="675" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#2C2C2A">Mesh Routing</text>
+  <text x="675" y="130" text-anchor="middle" font-size="9" fill="#5F5E5A">Internal topology table</text>
+  <line x1="576" y1="138" x2="774" y2="138" stroke="#B4B2A9" stroke-width="0.8"/>
+
+  <!-- pod mesh diagram -->
+  <circle cx="675" cy="220" r="28" fill="#1D9E75" stroke="#085041" stroke-width="1.5"/>
+  <text x="675" y="215" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Router</text>
+  <text x="675" y="228" text-anchor="middle" font-size="8" fill="#9FE1CB">P0 · 7B</text>
+
+  <circle cx="620" cy="300" r="24" fill="#7F77DD" stroke="#3C3489" stroke-width="1.2"/>
+  <text x="620" y="295" text-anchor="middle" font-size="8" fill="white">Research</text>
+  <text x="620" y="307" text-anchor="middle" font-size="7" fill="#CECBF6">P1 · 70B</text>
+
+  <circle cx="730" cy="300" r="24" fill="#7F77DD" stroke="#3C3489" stroke-width="1.2"/>
+  <text x="730" y="295" text-anchor="middle" font-size="8" fill="white">Comply</text>
+  <text x="730" y="307" text-anchor="middle" font-size="7" fill="#CECBF6">P1 · 13B</text>
+
+  <circle cx="600" cy="385" r="22" fill="#EF9F27" stroke="#854F0B" stroke-width="1.2"/>
+  <text x="600" y="380" text-anchor="middle" font-size="8" fill="white">Writer</text>
+  <text x="600" y="392" text-anchor="middle" font-size="7" fill="#FAEEDA">P2 · 70B</text>
+
+  <circle cx="675" cy="410" r="22" fill="#EF9F27" stroke="#854F0B" stroke-width="1.2"/>
+  <text x="675" y="405" text-anchor="middle" font-size="8" fill="white">Checker</text>
+  <text x="675" y="417" text-anchor="middle" font-size="7" fill="#FAEEDA">P2 · 13B</text>
+
+  <circle cx="750" cy="385" r="22" fill="#888780" stroke="#5F5E5A" stroke-width="1.2"/>
+  <text x="750" y="380" text-anchor="middle" font-size="8" fill="white">Summary</text>
+  <text x="750" y="392" text-anchor="middle" font-size="7" fill="#F1EFE8">P3 · 7B</text>
+
+  <!-- routing lines -->
+  <line x1="651" y1="243" x2="633" y2="278" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#arrowGreen)" stroke-dasharray="3,2"/>
+  <line x1="699" y1="243" x2="717" y2="278" stroke="#1D9E75" stroke-width="1.5" marker-end="url(#arrowGreen)" stroke-dasharray="3,2"/>
+  <line x1="620" y1="324" x2="614" y2="363" stroke="#534AB7" stroke-width="1.2" marker-end="url(#arrowPurple)" stroke-dasharray="3,2"/>
+  <line x1="635" y1="318" x2="660" y2="390" stroke="#534AB7" stroke-width="1.2" marker-end="url(#arrowPurple)" stroke-dasharray="3,2"/>
+  <line x1="730" y1="324" x2="700" y2="395" stroke="#534AB7" stroke-width="1.2" marker-end="url(#arrowPurple)" stroke-dasharray="3,2"/>
+  <line x1="742" y1="318" x2="758" y2="363" stroke="#534AB7" stroke-width="1.2" marker-end="url(#arrowPurple)" stroke-dasharray="3,2"/>
+
+  <!-- Legend -->
+  <rect x="576" y="438" width="198" height="54" rx="4" fill="white" stroke="#D3D1C7"/>
+  <text x="586" y="452" font-size="8" fill="#5F5E5A" font-weight="bold">Priority legend:</text>
+  <circle cx="592" cy="463" r="4" fill="#1D9E75"/><text x="600" y="467" font-size="7.5" fill="#5F5E5A">Interactive (&lt;50ms TTFT)</text>
+  <circle cx="592" cy="476" r="4" fill="#7F77DD"/><text x="600" y="480" font-size="7.5" fill="#5F5E5A">Standard SLA</text>
+  <circle cx="672" cy="463" r="4" fill="#EF9F27"/><text x="680" y="467" font-size="7.5" fill="#5F5E5A">Batch (&lt;1s)</text>
+  <circle cx="672" cy="476" r="4" fill="#888780"/><text x="680" y="480" font-size="7.5" fill="#5F5E5A">Background</text>
+
+  <!-- Cross-primitive arrows -->
+  <line x1="286" y1="180" x2="302" y2="180" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <line x1="286" y1="400" x2="302" y2="400" stroke="#854F0B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <line x1="550" y1="180" x2="566" y2="180" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+  <line x1="550" y1="400" x2="566" y2="400" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- Bottom latency summary bar -->
+  <rect x="22" y="536" width="776" height="20" rx="6" fill="#085041"/>
+  <text x="410" y="550" text-anchor="middle" font-size="10" fill="white" font-weight="bold">End-to-end handoff budget: &lt;2ms P99 · Arbitration: &lt;50ns · KV read: &lt;200ns · CPU involvement: zero</text>
+</svg>
